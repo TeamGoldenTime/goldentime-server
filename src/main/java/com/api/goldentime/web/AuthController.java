@@ -5,6 +5,8 @@ import com.api.goldentime.domain.user.User;
 import com.api.goldentime.service.NaverLoginService;
 import com.api.goldentime.web.dto.LoginResponseDto;
 import com.api.goldentime.web.dto.NaverLoginRequestDto;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@Api("Auth Controller")
 public class AuthController {
   private final NaverLoginService naverLoginService;
 
+  @ApiOperation(value="네이버 로그인")
   @PostMapping("/auth/naver")
   public ResponseEntity<LoginResponseDto> naver(@RequestBody @Valid NaverLoginRequestDto naverLoginRequestDto) {
     NaverProfile profile = naverLoginService.getProfile(naverLoginRequestDto);
