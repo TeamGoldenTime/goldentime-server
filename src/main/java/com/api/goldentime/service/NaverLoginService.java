@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class NaverLoginService implements LoginService<NaverLoginRequestDto, NaverProfile> {
@@ -42,14 +44,18 @@ public class NaverLoginService implements LoginService<NaverLoginRequestDto, Nav
 
   @Transactional
   public User login(NaverProfile profile) {
+
     User user = User.create(profile);
 
     //해당 user정보로 DB에서 검색
+    Optional<User> findUser = userRepository.findByEmail(user.getEmail());
 
     //존재하면 해당 유저 return
+    if(findUser.isPresent())
+      return user;
 
     //없으면 DB에 저장하고 return (DB에 저장할때, email 중복여부 체크 필요)
-
+    userRepository.save(user);
     return user;
   }
 }

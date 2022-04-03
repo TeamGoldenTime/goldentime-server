@@ -28,7 +28,7 @@ public class AuthController {
     User user = naverLoginService.login(profile);
     LoginResponseDto response = LoginResponseDto.builder()
         .user(user)
-        .token("test-token")
+        .token("test-token") //서비스용 토큰 발급
         .build();
 
     return new ResponseEntity<>(response, HttpStatus.OK);
