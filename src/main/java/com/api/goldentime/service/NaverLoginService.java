@@ -48,7 +48,7 @@ public class NaverLoginService implements LoginService<NaverLoginRequestDto, Nav
 
     //해당 user정보로 DB에서 검색
     User findUser = userRepository
-        .findByEmail(user.getEmail())
+        .findByIdentifier(user.getIdentifier())
         .orElse(null);
 
     //존재하면 해당 유저 return

@@ -23,6 +23,7 @@ public class NaverProfileDto {
 
   public User toUserEntity() {
     return User.builder()
+        .identifier(response.id)
         .name(response.name)
         .email(response.email)
         .phoneNumber(response.mobile)
