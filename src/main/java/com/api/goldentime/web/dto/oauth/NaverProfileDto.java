@@ -1,6 +1,7 @@
-package com.api.goldentime.web.dto;
+package com.api.goldentime.web.dto.oauth;
 
-import com.api.goldentime.domain.user.NaverProfile;
+import com.api.goldentime.domain.user.OauthProvider;
+import com.api.goldentime.domain.user.User;
 import lombok.Getter;
 
 @Getter
@@ -20,13 +21,13 @@ public class NaverProfileDto {
     private String gender;
   }
 
-  public NaverProfile toEntity() {
-    return NaverProfile.builder()
-        .id(response.id)
+  public User toUserEntity() {
+    return User.builder()
         .name(response.name)
         .email(response.email)
-        .mobile(response.mobile)
+        .phoneNumber(response.mobile)
         .gender(response.gender)
+        .provider(OauthProvider.NAVER)
         .build();
   }
 }
