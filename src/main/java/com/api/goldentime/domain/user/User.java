@@ -20,6 +20,9 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    private String identifier;
+
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -35,7 +38,12 @@ public class User {
     private OauthProvider provider;
 
     @Builder
-    public User(String email, String name, String phoneNumber, String gender, OauthProvider provider) {
+    public User(String identifier, String email, String name, String phoneNumber, String gender, OauthProvider provider) {
+        if (identifier == null) {
+            throw new IllegalStateException("User Entity 고유 식별자가 있어야 합니다.");
+        }
+
+        this.identifier = identifier;
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
