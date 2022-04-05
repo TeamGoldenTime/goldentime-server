@@ -1,4 +1,4 @@
-package com.api.goldentime.web.dto;
+package com.api.goldentime.web.dto.response;
 
 import com.api.goldentime.domain.user.User;
 import lombok.Builder;

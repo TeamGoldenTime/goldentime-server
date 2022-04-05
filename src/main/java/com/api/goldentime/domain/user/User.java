@@ -1,6 +1,7 @@
 package com.api.goldentime.domain.user;
 
-import com.api.goldentime.web.dto.NaverProfileDto;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,12 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @Entity
-@Builder
 public class User {
     @Id
     @GeneratedValue()
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -31,21 +31,15 @@ public class User {
     @Column
     private String gender;
 
+    @Enumerated(EnumType.STRING)
+    private OauthProvider provider;
+
     @Builder
-    public User(Long id, String email, String name, String phoneNumber, String gender) {
-        this.id = id;
+    public User(String email, String name, String phoneNumber, String gender, OauthProvider provider) {
         this.email = email;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
-    }
-
-    public static User create(NaverProfile naverProfile) {
-        return User.builder()
-            .email(naverProfile.getEmail())
-            .name(naverProfile.getName())
-            .phoneNumber(naverProfile.getMobile())
-            .gender(naverProfile.getGender())
-            .build();
+        this.provider = provider;
     }
 }
