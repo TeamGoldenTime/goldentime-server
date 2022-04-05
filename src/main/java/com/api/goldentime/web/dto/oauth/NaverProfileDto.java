@@ -2,9 +2,13 @@ package com.api.goldentime.web.dto.oauth;
 
 import com.api.goldentime.domain.user.OauthProvider;
 import com.api.goldentime.domain.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class NaverProfileDto {
 
   private String resultcode;
@@ -12,6 +16,8 @@ public class NaverProfileDto {
   private NaverProfileResponse response;
 
   @Getter
+  @NoArgsConstructor
+  @AllArgsConstructor
   public static class NaverProfileResponse {
 
     private String id;
