@@ -4,7 +4,7 @@ import com.api.goldentime.domain.user.User;
 import com.api.goldentime.service.NaverLoginService;
 import com.api.goldentime.web.dto.oauth.NaverProfileDto;
 import com.api.goldentime.web.dto.response.LoginResponseDto;
-import com.api.goldentime.web.dto.request.NaverLoginRequestDto;
+import com.api.goldentime.web.dto.request.login.NaverLoginRequestDto;
 import com.api.goldentime.web.dto.response.ResponseDto;
 import com.api.goldentime.web.dto.response.ResponseDto.ResponseStatus;
 import io.swagger.annotations.Api;

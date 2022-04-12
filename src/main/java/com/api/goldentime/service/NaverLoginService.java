@@ -4,7 +4,7 @@ import com.api.goldentime.domain.user.User;
 import com.api.goldentime.exception.NaverLoginFailException;
 import com.api.goldentime.repository.UserRepository;
 import com.api.goldentime.web.dto.oauth.NaverProfileDto;
-import com.api.goldentime.web.dto.request.NaverLoginRequestDto;
+import com.api.goldentime.web.dto.request.login.NaverLoginRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
