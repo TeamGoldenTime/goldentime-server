@@ -1,4 +1,4 @@
-package com.api.goldentime.web.dto.request;
+package com.api.goldentime.web.dto.request.login;
 
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
