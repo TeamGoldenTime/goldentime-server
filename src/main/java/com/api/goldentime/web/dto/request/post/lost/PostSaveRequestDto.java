@@ -1,4 +1,4 @@
-package com.api.goldentime.web.dto.request.post;
+package com.api.goldentime.web.dto.request.post.lost;
 
 import com.api.goldentime.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -14,23 +14,25 @@ public class PostSaveRequestDto {
 
     @NotBlank
     private User writer;
-    private String postDate;
     private String zipCode;
     private String address;
     private String image;
-    private String region; //latitude, longitude
+    private Double latitude;
+    private Double longitude;
     private String category;
     private String kind;
+    private String color;
 
     @Builder
-    public PostSaveRequestDto(User writer, String postDate, String zipCode, String address, String image, String region, String category, String kind) {
+    public PostSaveRequestDto(@NotBlank User writer, String zipCode, String address, String image, Double latitude, Double longitude, String category, String kind, String color) {
         this.writer = writer;
-        this.postDate = postDate;
         this.zipCode = zipCode;
         this.address = address;
         this.image = image;
-        this.region = region;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.category = category;
         this.kind = kind;
+        this.color = color;
     }
 }

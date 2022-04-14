@@ -6,6 +6,7 @@ import static org.mockito.BDDMockito.given;
 
 import com.api.goldentime.domain.user.User;
 import com.api.goldentime.repository.UserRepository;
+import com.api.goldentime.service.login.NaverLoginService;
 import com.api.goldentime.web.dto.oauth.NaverProfileDto;
 import com.api.goldentime.web.dto.oauth.NaverProfileDto.NaverProfileResponse;
 import org.junit.jupiter.api.Test;
