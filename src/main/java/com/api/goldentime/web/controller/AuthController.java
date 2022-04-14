@@ -1,9 +1,9 @@
-package com.api.goldentime.web;
+package com.api.goldentime.web.controller;
 
 import com.api.goldentime.domain.user.User;
-import com.api.goldentime.service.NaverLoginService;
+import com.api.goldentime.service.login.NaverLoginService;
 import com.api.goldentime.web.dto.oauth.NaverProfileDto;
-import com.api.goldentime.web.dto.response.LoginResponseDto;
+import com.api.goldentime.web.dto.response.login.LoginResponseDto;
 import com.api.goldentime.web.dto.request.login.NaverLoginRequestDto;
 import com.api.goldentime.web.dto.response.ResponseDto;
 import com.api.goldentime.web.dto.response.ResponseDto.ResponseStatus;

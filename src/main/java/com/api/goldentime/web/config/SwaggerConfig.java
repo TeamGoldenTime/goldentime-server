@@ -1,4 +1,4 @@
-package com.api.goldentime;
+package com.api.goldentime.web.config;
 
 import java.util.HashSet;
 import java.util.Set;
