@@ -1,14 +1,18 @@
 package com.api.goldentime.domain.post;
 
 import com.api.goldentime.domain.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="dtype")
 @Data
@@ -40,15 +44,4 @@ public abstract class BasePost implements Serializable {
     @Column
     private String color;
 
-    @Builder
-    public BasePost(int id, Address address, Region region, User writer, String image, String category, String kind, String color) {
-        this.id = id;
-        this.address = address;
-        this.region = region;
-        this.writer = writer;
-        this.image = image;
-        this.category = category;
-        this.kind = kind;
-        this.color = color;
-    }
 }

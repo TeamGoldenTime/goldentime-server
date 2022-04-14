@@ -20,7 +20,7 @@ public class LostPostSaveRequestDto extends PostSaveRequestDto {
     public LostPostSaveRequestDto(@NotBlank User writer, String zipCode, String address, String image,
                                   Double latitude, Double longitude, String category, String kind, @NotBlank int reward) {
 
-        super(writer, zipCode, address, image, latitude, longitude, category, kind);
+        //super(writer, zipCode, address, image, latitude, longitude, category, kind);
         this.reward = reward;
     }
 
