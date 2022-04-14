@@ -1,13 +1,11 @@
 package com.api.goldentime.domain.post;
 
 import com.api.goldentime.domain.user.User;
-import lombok.AllArgsConstructor;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
 
 
 @Getter
