@@ -44,6 +44,9 @@ public class LostPost {
   private List<Image> images = new ArrayList<>();
 
   @Column
+  private String area;
+
+  @Column
   private String kind;
 
   @Column
