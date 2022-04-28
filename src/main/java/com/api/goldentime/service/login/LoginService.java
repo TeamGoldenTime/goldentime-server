@@ -1,4 +1,4 @@
-package com.api.goldentime.service;
+package com.api.goldentime.service.login;
 
 import com.api.goldentime.domain.user.User;
 
