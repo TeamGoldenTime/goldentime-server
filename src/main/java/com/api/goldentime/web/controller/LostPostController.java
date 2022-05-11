@@ -8,9 +8,12 @@ import com.api.goldentime.web.dto.request.post.ImageRequestDto;
 import com.api.goldentime.web.dto.request.post.lost.LostPostSaveRequestDto;
 import com.api.goldentime.web.dto.response.ResponseDto;
 import com.api.goldentime.web.dto.response.post.ImageResponseDto;
+import com.api.goldentime.web.dto.response.post.LostPostListResponseDto;
 import com.api.goldentime.web.dto.response.post.LostPostSaveResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,6 +57,22 @@ public class LostPostController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "분실 신고 게시물 목록 반환")
+    @GetMapping("/pet/lost/postList")
+    public ResponseEntity<ResponseDto<LostPostListResponseDto>> postList()
+    {
+        List<LostPost> lostPostList = lostPostService.getLostPostList();
+        LostPostListResponseDto lostPostListResponseDto = new LostPostListResponseDto(lostPostList);
+
+        ResponseDto<LostPostListResponseDto> response = ResponseDto.<LostPostListResponseDto>builder()
+                .status(ResponseDto.ResponseStatus.SUCCESS)
+                .message("분실 신고 게시물 목록 조회 성공")
+                .data(lostPostListResponseDto)
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @ApiOperation(value = "이미지 분석 결과 반환")
     @PostMapping("/pet/analyze")
     public ResponseEntity<ResponseDto<ImageResponseDto>> analyze(@RequestBody @Valid ImageRequestDto imageRequestDto)
@@ -76,7 +96,6 @@ public class LostPostController {
             .breed(result.getBreed())
             .build();
 
-        //리턴
         ResponseDto<ImageResponseDto> response = ResponseDto.<ImageResponseDto>builder()
             .status(ResponseDto.ResponseStatus.SUCCESS)
             .message("이미지 분석 결과 반환 성공")

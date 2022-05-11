@@ -31,7 +31,7 @@ public class LostPost {
   @Id
   @GeneratedValue
   @Column(name= "lost_post_id")
-  private int id;
+  private Long id;
 
   @Embedded
   private Region region;

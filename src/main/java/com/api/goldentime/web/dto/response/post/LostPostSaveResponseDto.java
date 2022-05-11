@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 public class LostPostSaveResponseDto {
 
-    private final int id;
+    private final Long id;
     private final String kind;
     private final String color;
 
     @Builder
-    public LostPostSaveResponseDto(int id, String kind, String color) {
+    public LostPostSaveResponseDto(Long id, String kind, String color) {
         this.id = id;
         this.kind = kind;
         this.color = color;
