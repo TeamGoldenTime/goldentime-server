@@ -41,5 +41,18 @@ public class LostPostService {
         return lostPostRepository.findAll();
     }
 
+    @Transactional
+    public LostPost findById(Long id)
+    {
+        LostPost post = lostPostRepository.findById(id).orElse(null);
+
+        if(post == null)
+        {
+            throw new IllegalStateException("존재하지 않는 게시물");
+        }
+
+        return post;
+    }
+
 
 }

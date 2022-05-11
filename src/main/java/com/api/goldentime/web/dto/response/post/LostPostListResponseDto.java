@@ -17,24 +17,4 @@ public class LostPostListResponseDto {
 
     private List<LostPost> lostPostList;
 
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class LostPostResponse {
-        private Long userId;
-        private List<ImageDto> images;
-        private Double latitude;
-        private Double longitude;
-        private String kind;
-        private String color;
-        private String name;
-        private String remark; //특이사항
-        private String area;
-        private LocalDateTime date;
-        private int age;
-        private int reward;
-
-    }
-
-
 }
