@@ -41,7 +41,7 @@ public class CatchPostController {
 
         ResponseDto<CatchPostSaveResponseDto> response = ResponseDto.<CatchPostSaveResponseDto>builder()
                 .status(ResponseDto.ResponseStatus.SUCCESS)
-                .message("분실 신고 게시물 등록 성공")
+                .message("목격 신고 게시물 등록 성공")
                 .data(catchPostSaveResponseDto)
                 .build();
 
@@ -63,7 +63,7 @@ public class CatchPostController {
         //ResponseDto 생성
         ResponseDto<List<CatchPostResponseDto>> response = ResponseDto.<List<CatchPostResponseDto>>builder()
             .status(ResponseDto.ResponseStatus.SUCCESS)
-            .message("분실 신고 게시물 목록 조회 성공")
+            .message("목격 신고 게시물 목록 조회 성공")
             .data(catchPostListDto)
             .build();
 
@@ -79,7 +79,7 @@ public class CatchPostController {
 
         ResponseDto<CatchPostResponseDto> response = ResponseDto.<CatchPostResponseDto>builder()
             .status(ResponseDto.ResponseStatus.SUCCESS)
-            .message("분실 신고 게시물 목록 조회 성공")
+            .message("목격 신고 게시물 조회 성공")
             .data(catchPostResponseDto)
             .build();
 
