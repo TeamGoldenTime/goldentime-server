@@ -1,6 +1,7 @@
 package com.api.goldentime.web.controller;
 
 import com.api.goldentime.domain.post.CatchPost;
+import com.api.goldentime.domain.post.LostPost;
 import com.api.goldentime.service.post.CatchPostService;
 import com.api.goldentime.web.dto.request.post.ImageRequestDto;
 import com.api.goldentime.web.dto.request.post.catchPost.CatchPostSaveRequestDto;
@@ -9,6 +10,8 @@ import com.api.goldentime.web.dto.response.post.ImageResponseDto;
 import com.api.goldentime.web.dto.response.post.catchPost.CatchPostListResponseDto;
 import com.api.goldentime.web.dto.response.post.catchPost.CatchPostResponseDto;
 import com.api.goldentime.web.dto.response.post.catchPost.CatchPostSaveResponseDto;
+import com.api.goldentime.web.dto.response.post.lostPost.LostPostListResponseDto;
+import com.api.goldentime.web.dto.response.post.lostPost.LostPostResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,8 +55,19 @@ public class CatchPostController {
     @GetMapping("/pet/catch/postList")
     public ResponseEntity<ResponseDto<CatchPostListResponseDto>> postList()
     {
+        //목록 조회
         List<CatchPost> catchPostList = catchPostService.getCatchPostList();
-        CatchPostListResponseDto catchPostListResponseDto = new CatchPostListResponseDto(catchPostList);
+
+        // LostPostResponseDto 형 list 생성
+        List<CatchPostResponseDto> list = new ArrayList<>();
+
+        //LostPost를 LostPostResponseDto로 변환하여 list에 삽입
+        for(CatchPost entity : catchPostList)
+        {
+            //list.add(new LostPostResponseDto(entity));
+        }
+
+        CatchPostListResponseDto catchPostListResponseDto = new CatchPostListResponseDto(list);
 
         ResponseDto<CatchPostListResponseDto> response = ResponseDto.<CatchPostListResponseDto>builder()
                 .status(ResponseDto.ResponseStatus.SUCCESS)
@@ -70,8 +85,9 @@ public class CatchPostController {
         CatchPost catchPost = catchPostService.findById(id);
         CatchPostResponseDto catchPostResponseDto = CatchPostResponseDto.builder()
                 .writer(catchPost.getWriter())
-                // .images(catchPost.getImages())
+                //.images(catchPost.getCatchImages())
                 .kind(catchPost.getKind())
+                .gender(catchPost.getGender())
                 .color(catchPost.getColor())
                 .remark(catchPost.getRemark())
                 .area(catchPost.getArea())

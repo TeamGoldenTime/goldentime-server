@@ -1,5 +1,6 @@
 package com.api.goldentime.web.dto.response.post.lostPost;
 
+import com.api.goldentime.domain.post.LostPost;
 import com.api.goldentime.domain.user.User;
 import com.api.goldentime.web.dto.request.post.lostPost.LostImageDto;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class LostPostResponseDto {
     private Double latitude;
     private Double longitude;
     private String kind;
+    private String gender;
     private String color;
     private String name;
     private String remark; //특이사항

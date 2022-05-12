@@ -49,6 +49,9 @@ public class CatchPost {
     private String kind;
 
     @Column
+    private String gender;
+
+    @Column
     private String color;
 
     @Column

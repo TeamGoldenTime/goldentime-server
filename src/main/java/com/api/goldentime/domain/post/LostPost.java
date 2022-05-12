@@ -50,6 +50,9 @@ public class LostPost {
   private String kind;
 
   @Column
+  private String gender;
+
+  @Column
   private String name;
 
   @Column

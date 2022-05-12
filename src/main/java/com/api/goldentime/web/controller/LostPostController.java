@@ -12,6 +12,7 @@ import com.api.goldentime.web.dto.response.post.lostPost.LostPostSaveResponseDto
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -55,8 +56,19 @@ public class LostPostController {
     @GetMapping("/pet/lost/postList")
     public ResponseEntity<ResponseDto<LostPostListResponseDto>> postList()
     {
+        //목록 조회
         List<LostPost> lostPostList = lostPostService.getLostPostList();
-        LostPostListResponseDto lostPostListResponseDto = new LostPostListResponseDto(lostPostList);
+
+        // LostPostResponseDto 형 list 생성
+        List<LostPostResponseDto> list = new ArrayList<>();
+
+        //LostPost를 LostPostResponseDto로 변환하여 list에 삽입
+        for(LostPost entity : lostPostList)
+        {
+            //list.add(new LostPostResponseDto(entity));
+        }
+
+       LostPostListResponseDto lostPostListResponseDto = new LostPostListResponseDto(list);
 
         ResponseDto<LostPostListResponseDto> response = ResponseDto.<LostPostListResponseDto>builder()
                 .status(ResponseDto.ResponseStatus.SUCCESS)
@@ -74,8 +86,9 @@ public class LostPostController {
        LostPost lostPost = lostPostService.findById(id);
        LostPostResponseDto lostPostResponseDto = LostPostResponseDto.builder()
                .writer(lostPost.getWriter())
-               // .images(lostPost.getImages())
+               //.images(lostPost.getLostImages())
                .kind(lostPost.getKind())
+               .gender(lostPost.getGender())
                .color(lostPost.getColor())
                .name(lostPost.getName())
                .remark(lostPost.getRemark())

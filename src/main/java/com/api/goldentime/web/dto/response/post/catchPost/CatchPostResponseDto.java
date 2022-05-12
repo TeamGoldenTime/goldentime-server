@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class CatchPostResponseDto {
     private Double latitude;
     private Double longitude;
     private String kind;
+    private String gender;
     private String color;
     private String remark; //특이사항
     private String area;
