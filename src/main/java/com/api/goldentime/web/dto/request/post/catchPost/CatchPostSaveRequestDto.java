@@ -3,13 +3,10 @@ package com.api.goldentime.web.dto.request.post.catchPost;
 import com.api.goldentime.domain.post.CatchImage;
 import com.api.goldentime.domain.post.CatchPost;
 import com.api.goldentime.domain.post.Region;
-
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.api.goldentime.web.dto.request.post.lostPost.LostImageDto;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +18,7 @@ public class CatchPostSaveRequestDto {
 
     @NotNull
     private Long userId;
-    private List<CatchImageDto> images;
+    private List<CatchImageRequestDto> images;
     private Double latitude;
     private Double longitude;
     private String kind;
@@ -33,7 +30,7 @@ public class CatchPostSaveRequestDto {
     public CatchPost toEntity()
     {
         Region region = new Region(getLatitude(), getLongitude());
-        List<CatchImage> catchImages = getImages().stream().map(CatchImageDto::toEntity).collect(Collectors.toList());
+        List<CatchImage> catchImages = getImages().stream().map(CatchImageRequestDto::toEntity).collect(Collectors.toList());
 
         CatchPost catchpost = CatchPost.builder()
                 .region(region)

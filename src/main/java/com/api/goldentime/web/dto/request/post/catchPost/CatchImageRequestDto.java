@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class CatchImageDto {
+public class CatchImageRequestDto {
 
     private String name;
     private String location;

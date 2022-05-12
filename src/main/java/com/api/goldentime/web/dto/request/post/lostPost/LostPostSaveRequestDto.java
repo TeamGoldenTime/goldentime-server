@@ -27,6 +27,7 @@ public class LostPostSaveRequestDto {
     private String name;
     private String remark; //특이사항
     private String area;
+    private String gender;
     private LocalDateTime date;
     private int age;
     private int reward;
@@ -46,6 +47,7 @@ public class LostPostSaveRequestDto {
             .date(getDate())
             .age(getAge())
             .area(getArea())
+            .gender(getGender())
             .reward(getReward())
             .build();
 

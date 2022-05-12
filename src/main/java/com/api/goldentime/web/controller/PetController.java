@@ -2,7 +2,7 @@ package com.api.goldentime.web.controller;
 
 import com.api.goldentime.web.dto.request.post.ImageRequestDto;
 import com.api.goldentime.web.dto.response.ResponseDto;
-import com.api.goldentime.web.dto.response.post.ImageResponseDto;
+import com.api.goldentime.web.dto.response.post.BreedColorResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class PetController {
 
     @ApiOperation(value = "이미지 분석 결과 반환")
     @PostMapping("/pet/analyze")
-    public ResponseEntity<ResponseDto<ImageResponseDto>> analyze(@RequestBody @Valid ImageRequestDto imageRequestDto)
+    public ResponseEntity<ResponseDto<BreedColorResponseDto>> analyze(@RequestBody @Valid ImageRequestDto imageRequestDto)
     {
         RestTemplate restTemplate = new RestTemplate();
         String apiURL = "http://127.0.0.1:5000/breed";
@@ -31,21 +31,21 @@ public class PetController {
 
         HttpEntity<?> request = new HttpEntity<>(imageRequestDto, httpHeaders);
 
-        ImageResponseDto result = restTemplate.exchange(apiURL, HttpMethod.POST, request,
-                ImageResponseDto.class).getBody();
+        BreedColorResponseDto result = restTemplate.exchange(apiURL, HttpMethod.POST, request,
+                BreedColorResponseDto.class).getBody();
 
         if (result == null) {
             throw new IllegalArgumentException("분석 결과를 받아올 수 없습니다.");
         }
 
-        ImageResponseDto imageResponseDto = ImageResponseDto.builder()
+        BreedColorResponseDto breedColorResponseDto = BreedColorResponseDto.builder()
                 .breed(result.getBreed())
                 .build();
 
-        ResponseDto<ImageResponseDto> response = ResponseDto.<ImageResponseDto>builder()
+        ResponseDto<BreedColorResponseDto> response = ResponseDto.<BreedColorResponseDto>builder()
                 .status(ResponseDto.ResponseStatus.SUCCESS)
                 .message("이미지 분석 결과 반환 성공")
-                .data(imageResponseDto)
+                .data(breedColorResponseDto)
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
