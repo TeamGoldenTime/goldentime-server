@@ -1,21 +1,18 @@
 package com.api.goldentime.web.controller;
 
 import com.api.goldentime.domain.post.LostPost;
-import com.api.goldentime.exception.NaverLoginFailException;
 import com.api.goldentime.service.post.LostPostService;
-import com.api.goldentime.web.dto.oauth.NaverProfileDto;
 import com.api.goldentime.web.dto.request.post.ImageRequestDto;
-import com.api.goldentime.web.dto.request.post.lost.LostPostSaveRequestDto;
+import com.api.goldentime.web.dto.request.post.lostPost.LostPostSaveRequestDto;
 import com.api.goldentime.web.dto.response.ResponseDto;
 import com.api.goldentime.web.dto.response.post.ImageResponseDto;
-import com.api.goldentime.web.dto.response.post.LostPostListResponseDto;
-import com.api.goldentime.web.dto.response.post.LostPostResponseDto;
-import com.api.goldentime.web.dto.response.post.LostPostSaveResponseDto;
+import com.api.goldentime.web.dto.response.post.lostPost.LostPostListResponseDto;
+import com.api.goldentime.web.dto.response.post.lostPost.LostPostResponseDto;
+import com.api.goldentime.web.dto.response.post.lostPost.LostPostSaveResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import java.util.List;
-import java.util.Map;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -24,7 +21,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @RestController

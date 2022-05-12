@@ -1,7 +1,8 @@
 package com.api.goldentime.web.dto.request.post;
 
-import com.api.goldentime.web.dto.request.post.lost.ImageDto;
 import java.util.List;
+
+import com.api.goldentime.web.dto.request.post.lostPost.LostImageDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ImageRequestDto {
 
-  private List<ImageDto> images;
+  private List<LostImageDto> images;
 }

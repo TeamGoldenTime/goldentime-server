@@ -1,12 +1,13 @@
-package com.api.goldentime.web.dto.request.post.lost;
+package com.api.goldentime.web.dto.request.post.lostPost;
 
-import com.api.goldentime.domain.post.Image;
+import com.api.goldentime.domain.post.LostImage;
 import com.api.goldentime.domain.post.LostPost;
 import com.api.goldentime.domain.post.Region;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class LostPostSaveRequestDto {
 
     @NotNull
     private Long userId;
-    private List<ImageDto> images;
+    private List<LostImageDto> images;
     private Double latitude;
     private Double longitude;
     private String kind;
@@ -34,11 +35,10 @@ public class LostPostSaveRequestDto {
     public LostPost toEntity()
     {
         Region region = new Region(getLatitude(), getLongitude());
-        List<Image> images = getImages().stream().map(ImageDto::toEntity).collect(Collectors.toList());
+        List<LostImage> lostImages = getImages().stream().map(LostImageDto::toEntity).collect(Collectors.toList());
 
         LostPost lostpost = LostPost.builder()
             .region(region)
-            .kind(getKind())
             .kind(getKind())
             .color(getColor())
             .name(getName())
@@ -49,7 +49,7 @@ public class LostPostSaveRequestDto {
             .reward(getReward())
             .build();
 
-        lostpost.addImages(images);
+        lostpost.addImages(lostImages);
         return lostpost;
     }
 

@@ -18,11 +18,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Image {
+public class LostImage {
 
   @Id
   @GeneratedValue()
-  @Column(name = "image_id")
+  @Column(name = "lost_image_id")
   private Long id;
 
   @ManyToOne
