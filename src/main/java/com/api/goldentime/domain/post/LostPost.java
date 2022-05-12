@@ -31,7 +31,7 @@ public class LostPost {
   @Id
   @GeneratedValue
   @Column(name= "lost_post_id")
-  private int id;
+  private Long id;
 
   @Embedded
   private Region region;
@@ -41,13 +41,16 @@ public class LostPost {
   private User writer;
 
   @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-  private List<Image> images = new ArrayList<>();
+  private List<LostImage> lostImages = new ArrayList<>();
 
   @Column
   private String area;
 
   @Column
   private String kind;
+
+  @Column
+  private String gender;
 
   @Column
   private String name;
@@ -68,10 +71,10 @@ public class LostPost {
   private int reward;
 
 
-  public void addImages(List<Image> images) {
-    setImages(images);
-    for (Image image : images) {
-      image.setPost(this);
+  public void addImages(List<LostImage> lostImages) {
+    setLostImages(lostImages);
+    for (LostImage lostImage : lostImages) {
+      lostImage.setPost(this);
     }
   }
 }
