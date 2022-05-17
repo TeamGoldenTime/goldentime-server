@@ -21,6 +21,9 @@ public class CatchPostResponseDto {
     private List<ImageResponseDto> images;
     private Double latitude;
     private Double longitude;
+    private String region_1depth_name;
+    private String region_2depth_name;
+    private String region_3depth_name;
     private String kind;
     private String gender;
     private String color;
@@ -35,6 +38,9 @@ public class CatchPostResponseDto {
             .images(catchPost.getCatchImages())
             .latitude(catchPost.getRegion().getLatitude())
             .longitude(catchPost.getRegion().getLongitude())
+            .region_1depth_name(catchPost.getAddress().getRegion_1depth_name())
+            .region_2depth_name(catchPost.getAddress().getRegion_2depth_name())
+            .region_3depth_name(catchPost.getAddress().getRegion_3depth_name())
             .kind(catchPost.getKind())
             .gender(catchPost.getGender())
             .color(catchPost.getColor())
@@ -45,9 +51,8 @@ public class CatchPostResponseDto {
     }
 
     @Builder
-    public CatchPostResponseDto(Long id ,User writer,
-        List<CatchImage> images, Double latitude, Double longitude, String kind,
-        String gender, String color, String remark, String area, LocalDateTime date) {
+    public CatchPostResponseDto(Long id, User writer, List<CatchImage> images,
+                                Double latitude, Double longitude, String region_1depth_name, String region_2depth_name, String region_3depth_name, String kind, String gender, String color, String remark, String area, LocalDateTime date) {
         this.id = id;
         this.writer = new UserResponseDto(writer);
         this.images = images.stream()
@@ -55,6 +60,9 @@ public class CatchPostResponseDto {
             .collect(Collectors.toList());
         this.latitude = latitude;
         this.longitude = longitude;
+        this.region_1depth_name = region_1depth_name;
+        this.region_2depth_name = region_2depth_name;
+        this.region_3depth_name = region_3depth_name;
         this.kind = kind;
         this.gender = gender;
         this.color = color;

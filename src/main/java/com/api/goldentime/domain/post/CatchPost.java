@@ -35,6 +35,9 @@ public class CatchPost {
     @Embedded
     private Region region;
 
+    @Embedded
+    private Address address;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User writer;
@@ -59,6 +62,7 @@ public class CatchPost {
 
     @Column
     private LocalDateTime date;
+
 
 
     public void addImages(List<CatchImage> catchImages) {

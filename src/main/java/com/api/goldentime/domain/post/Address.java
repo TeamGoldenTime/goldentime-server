@@ -1,6 +1,8 @@
 package com.api.goldentime.domain.post;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -11,11 +13,21 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Getter
 public class Address {
 
     @Column(name = "zipcode", nullable = false)
     private String zipCode;
-    @Column(name = "address", nullable = false)
-    private String address;
+
+    @Column(name = "region_1depth_name", nullable = false)
+    private String region_1depth_name;
+
+    @Column(name = "region_2depth_name", nullable = false)
+    private String region_2depth_name;
+
+    @Column(name = "region_3depth_name", nullable = false)
+    private String region_3depth_name;
+
+
 
 }

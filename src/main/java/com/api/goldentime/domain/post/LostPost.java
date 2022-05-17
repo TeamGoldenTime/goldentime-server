@@ -36,6 +36,9 @@ public class LostPost {
   @Embedded
   private Region region;
 
+  @Embedded
+  private Address address;
+
   @ManyToOne
   @JoinColumn(name = "user_id")
   private User writer;

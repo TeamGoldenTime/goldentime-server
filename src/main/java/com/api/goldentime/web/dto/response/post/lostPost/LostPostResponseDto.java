@@ -21,6 +21,9 @@ public class LostPostResponseDto {
     private List<ImageResponseDto> images;
     private Double latitude;
     private Double longitude;
+    private String region_1depth_name;
+    private String region_2depth_name;
+    private String region_3depth_name;
     private String kind;
     private String gender;
     private String color;
@@ -38,6 +41,9 @@ public class LostPostResponseDto {
             .images(lostPost.getLostImages())
             .latitude(lostPost.getRegion().getLatitude())
             .longitude(lostPost.getRegion().getLongitude())
+            .region_1depth_name(lostPost.getAddress().getRegion_1depth_name())
+            .region_2depth_name(lostPost.getAddress().getRegion_2depth_name())
+            .region_2depth_name(lostPost.getAddress().getRegion_3depth_name())
             .kind(lostPost.getKind())
             .gender(lostPost.getGender())
             .color(lostPost.getColor())
@@ -46,16 +52,18 @@ public class LostPostResponseDto {
             .area(lostPost.getArea())
             .date(lostPost.getDate())
             .age(lostPost.getAge())
-//            .remark(lostPost.getReward())
+//            .remark(lostPost.getRemark())
             .build();
     }
 
     @Builder
     public LostPostResponseDto(
         Long id, User writer,
-        List<LostImage> images, Double latitude, Double longitude, String kind,
+        List<LostImage> images, Double latitude, Double longitude,
+        String region_1depth_name, String region_2depth_name, String region_3depth_name,String kind,
         String gender, String color, String name, String remark, String area,
         LocalDateTime date, int age, int reward) {
+
         this.id = id;
         this.writer = new UserResponseDto(writer);
         this.images = images.stream()
@@ -63,6 +71,9 @@ public class LostPostResponseDto {
             .collect(Collectors.toList());
         this.latitude = latitude;
         this.longitude = longitude;
+        this.region_1depth_name = region_1depth_name;
+        this.region_2depth_name = region_2depth_name;
+        this.region_3depth_name = region_3depth_name;
         this.kind = kind;
         this.gender = gender;
         this.color = color;
