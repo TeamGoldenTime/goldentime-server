@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 @Getter
@@ -13,7 +15,12 @@ import javax.persistence.Entity;
 @Builder
 public class PetData {
 
-    @Column(name = "img_url", nullable = false)
+    @Id
+    @GeneratedValue
+    @Column
+    private Long id;
+
+    @Column
     private String imgUrl;
 
     @Column

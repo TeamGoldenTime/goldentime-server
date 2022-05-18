@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PetDataResponseDto {
 
+    private Long id;
+
     private String imgUrl;
 
     private String postNum;
