@@ -1,5 +1,6 @@
 package com.api.goldentime.web.controller;
 
+import com.api.goldentime.domain.post.Address;
 import com.api.goldentime.domain.post.CatchPost;
 import com.api.goldentime.service.post.CatchPostService;
 import com.api.goldentime.web.dto.request.post.catchPost.CatchPostSaveRequestDto;
@@ -31,6 +32,8 @@ public class CatchPostController {
     @PostMapping("/pet/post/catch")
     public ResponseEntity<ResponseDto<CatchPostSaveResponseDto>> save(@RequestBody @Valid CatchPostSaveRequestDto catchPostSaveRequestDto)
     {
+        //Address address = KakaoApiController.getAddress(lat , lng);
+        //CatchPost post = catchPostService.save(catchPostSaveRequestDto, address);
         CatchPost post = catchPostService.save(catchPostSaveRequestDto);
 
         CatchPostSaveResponseDto catchPostSaveResponseDto = CatchPostSaveResponseDto.builder()
