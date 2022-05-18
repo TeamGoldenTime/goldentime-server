@@ -1,6 +1,10 @@
 package com.api.goldentime.web.controller;
 
 import com.api.goldentime.domain.crawling.PetData;
+import com.api.goldentime.service.crawling.PetDataService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,8 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class ExcelController {
+@RequiredArgsConstructor
+@Api("Pet Data Controller")
+public class PetDataController {
 
+    private final PetDataService petDataService;
+
+    @ApiOperation(value = "크롤링 데이터 저장 ")
     @PostMapping("/excel/read")
     public void readExcel(@RequestParam("file") MultipartFile file)
             throws IOException {
@@ -58,6 +67,7 @@ public class ExcelController {
             data.setDetailLink(row.getCell(6).getStringCellValue());
 
             //db에 저장
+            petDataService.save(data);
 
             //id를 엑셀에 삽입
         }
