@@ -34,6 +34,7 @@ public class PetDataController {
     public void readExcel(@RequestParam("file") MultipartFile file)
             throws IOException {
 
+        System.out.println(file.getName());
         //List<PetData> dataList = new ArrayList<>();
 
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
@@ -60,11 +61,12 @@ public class PetDataController {
 
             data.setImgUrl(row.getCell(0).getStringCellValue());
             data.setPostNum(row.getCell(1).getStringCellValue());
-            data.setReportDate(row.getCell(2).getStringCellValue());
+            data.setReportDate(row.getCell(2).getDateCellValue().toString());
             data.setKind(row.getCell(3).getStringCellValue());
             data.setGender(row.getCell(4).getStringCellValue());
             data.setLostPlace(row.getCell(5).getStringCellValue());
-            data.setDetailLink(row.getCell(6).getStringCellValue());
+            data.setRemark(row.getCell(6).getStringCellValue());
+            data.setDetailLink(row.getCell(7).getStringCellValue());
 
             //db에 저장
             petDataService.save(data);

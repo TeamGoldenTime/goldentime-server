@@ -25,5 +25,7 @@ public class PetDataResponseDto {
 
     private String lostPlace;
 
+    private String remark;
+
     private String detailLink;
 }

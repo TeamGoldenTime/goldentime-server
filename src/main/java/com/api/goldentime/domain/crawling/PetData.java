@@ -39,6 +39,9 @@ public class PetData {
     private String lostPlace;
 
     @Column
+    private String remark;
+
+    @Column
     private String detailLink;
 
 }
