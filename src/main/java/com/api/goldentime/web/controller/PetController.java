@@ -5,6 +5,8 @@ import com.api.goldentime.web.dto.response.ResponseDto;
 import com.api.goldentime.web.dto.response.post.BreedColorResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,14 +26,16 @@ public class PetController {
     public ResponseEntity<ResponseDto<BreedColorResponseDto>> analyze(@RequestBody @Valid ImageRequestDto imageRequestDto)
     {
         RestTemplate restTemplate = new RestTemplate();
-        String apiURL = "http://127.0.0.1:5000/breed";
+        String apiURL = "http://127.0.0.1:5000/inference";
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("Content-Type", "application/json");
 
-        HttpEntity<?> request = new HttpEntity<>(imageRequestDto, httpHeaders);
+        Map<String, String> request = new HashMap<>();
+        request.put("path", imageRequestDto.getImages().get(0).getLocation());
+        HttpEntity<?> httpEntity = new HttpEntity<>(request, httpHeaders);
 
-        BreedColorResponseDto result = restTemplate.exchange(apiURL, HttpMethod.POST, request,
+        BreedColorResponseDto result = restTemplate.exchange(apiURL, HttpMethod.POST, httpEntity,
                 BreedColorResponseDto.class).getBody();
 
         if (result == null) {
