@@ -16,18 +16,15 @@ import javax.persistence.Embeddable;
 @Getter
 public class Address {
 
-    @Column(name = "zipcode", nullable = false)
+    @Column(name = "zipcode")
     private String zipCode;
 
-    @Column(name = "region_1depth_name", nullable = false)
+    @Column(name = "region_1depth_name")
     private String region_1depth_name;
 
-    @Column(name = "region_2depth_name", nullable = false)
+    @Column(name = "region_2depth_name")
     private String region_2depth_name;
 
-    @Column(name = "region_3depth_name", nullable = false)
+    @Column(name = "region_3depth_name")
     private String region_3depth_name;
-
-
-
 }

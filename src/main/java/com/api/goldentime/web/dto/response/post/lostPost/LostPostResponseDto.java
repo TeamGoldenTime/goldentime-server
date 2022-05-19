@@ -2,6 +2,7 @@ package com.api.goldentime.web.dto.response.post.lostPost;
 
 import com.api.goldentime.domain.post.LostImage;
 import com.api.goldentime.domain.post.LostPost;
+import com.api.goldentime.domain.post.PostType;
 import com.api.goldentime.domain.user.User;
 import com.api.goldentime.web.dto.response.login.LoginResponseDto.UserResponseDto;
 import com.api.goldentime.web.dto.response.post.ImageResponseDto;
@@ -30,6 +31,7 @@ public class LostPostResponseDto {
     private String name;
     private String remark; //특이사항
     private String area;
+    private String type;
     private LocalDateTime date;
     private int age;
     private int reward;
@@ -41,15 +43,17 @@ public class LostPostResponseDto {
             .images(lostPost.getLostImages())
             .latitude(lostPost.getRegion().getLatitude())
             .longitude(lostPost.getRegion().getLongitude())
-            .region_1depth_name(lostPost.getAddress().getRegion_1depth_name())
-            .region_2depth_name(lostPost.getAddress().getRegion_2depth_name())
-            .region_2depth_name(lostPost.getAddress().getRegion_3depth_name())
+            //        TODO:: Address구현 후 살리기
+//            .region_1depth_name(lostPost.getAddress().getRegion_1depth_name())
+//            .region_2depth_name(lostPost.getAddress().getRegion_2depth_name())
+//            .region_2depth_name(lostPost.getAddress().getRegion_3depth_name())
             .kind(lostPost.getKind())
             .gender(lostPost.getGender())
             .color(lostPost.getColor())
             .name(lostPost.getName())
             .remark(lostPost.getRemark())
             .area(lostPost.getArea())
+            .type(lostPost.getType())
             .date(lostPost.getDate())
             .age(lostPost.getAge())
 //            .remark(lostPost.getRemark())
@@ -62,7 +66,7 @@ public class LostPostResponseDto {
         List<LostImage> images, Double latitude, Double longitude,
         String region_1depth_name, String region_2depth_name, String region_3depth_name,String kind,
         String gender, String color, String name, String remark, String area,
-        LocalDateTime date, int age, int reward) {
+        LocalDateTime date, PostType type, int age, int reward) {
 
         this.id = id;
         this.writer = new UserResponseDto(writer);
@@ -80,6 +84,7 @@ public class LostPostResponseDto {
         this.name = name;
         this.remark = remark;
         this.area = area;
+        this.type = type.toString();
         this.date = date;
         this.age = age;
         this.reward = reward;

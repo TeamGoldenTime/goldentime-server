@@ -2,6 +2,7 @@ package com.api.goldentime.service.post;
 
 import com.api.goldentime.domain.post.Address;
 import com.api.goldentime.domain.post.CatchPost;
+import com.api.goldentime.domain.post.PostType;
 import com.api.goldentime.domain.user.User;
 import com.api.goldentime.repository.CatchPostRepository;
 import com.api.goldentime.repository.UserRepository;
@@ -29,6 +30,7 @@ public class CatchPostService {
         }
 
         CatchPost catchPost = catchPostSaveRequestDto.toEntity();
+        catchPost.setType(PostType.CATCH);
         //catchPost.setAddress(address);
         catchPost.setWriter(user);
 
