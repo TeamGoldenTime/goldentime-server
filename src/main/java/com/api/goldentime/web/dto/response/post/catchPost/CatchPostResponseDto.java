@@ -22,6 +22,7 @@ public class CatchPostResponseDto {
   private List<ImageResponseDto> images;
   private Double latitude;
   private Double longitude;
+  private String addressName;
   private String region_1depth_name;
   private String region_2depth_name;
   private String region_3depth_name;
@@ -40,6 +41,7 @@ public class CatchPostResponseDto {
         .images(catchPost.getCatchImages())
         .latitude(catchPost.getRegion().getLatitude())
         .longitude(catchPost.getRegion().getLongitude())
+        .addressName(catchPost.getAddress().getAddressName())
         .region_1depth_name(catchPost.getAddress().getRegion_1depth_name())
         .region_2depth_name(catchPost.getAddress().getRegion_2depth_name())
         .region_3depth_name(catchPost.getAddress().getRegion_3depth_name())
@@ -55,7 +57,7 @@ public class CatchPostResponseDto {
 
   @Builder
   public CatchPostResponseDto(Long id, User writer, List<CatchImage> images,
-      Double latitude, Double longitude, String region_1depth_name, String region_2depth_name,
+      Double latitude, Double longitude, String addressName, String region_1depth_name, String region_2depth_name,
       String region_3depth_name, String kind, String gender, String color, String remark,
       String area, PostType type, LocalDateTime date) {
     this.id = id;
@@ -65,6 +67,7 @@ public class CatchPostResponseDto {
         .collect(Collectors.toList());
     this.latitude = latitude;
     this.longitude = longitude;
+    this.addressName = addressName;
     this.region_1depth_name = region_1depth_name;
     this.region_2depth_name = region_2depth_name;
     this.region_3depth_name = region_3depth_name;

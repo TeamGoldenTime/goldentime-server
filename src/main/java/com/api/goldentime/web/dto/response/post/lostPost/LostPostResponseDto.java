@@ -22,6 +22,7 @@ public class LostPostResponseDto {
     private List<ImageResponseDto> images;
     private Double latitude;
     private Double longitude;
+    private String addressName;
     private String region_1depth_name;
     private String region_2depth_name;
     private String region_3depth_name;
@@ -43,6 +44,7 @@ public class LostPostResponseDto {
             .images(lostPost.getLostImages())
             .latitude(lostPost.getRegion().getLatitude())
             .longitude(lostPost.getRegion().getLongitude())
+            .addressName(lostPost.getAddress().getAddressName())
             .region_1depth_name(lostPost.getAddress().getRegion_1depth_name())
             .region_2depth_name(lostPost.getAddress().getRegion_2depth_name())
             .region_2depth_name(lostPost.getAddress().getRegion_3depth_name())
@@ -62,7 +64,7 @@ public class LostPostResponseDto {
     @Builder
     public LostPostResponseDto(
         Long id, User writer,
-        List<LostImage> images, Double latitude, Double longitude,
+        List<LostImage> images, Double latitude, Double longitude, String addressName,
         String region_1depth_name, String region_2depth_name, String region_3depth_name,String kind,
         String gender, String color, String name, String remark, String area,
         LocalDateTime date, PostType type, int age, int reward) {
@@ -74,6 +76,7 @@ public class LostPostResponseDto {
             .collect(Collectors.toList());
         this.latitude = latitude;
         this.longitude = longitude;
+        this.addressName = addressName;
         this.region_1depth_name = region_1depth_name;
         this.region_2depth_name = region_2depth_name;
         this.region_3depth_name = region_3depth_name;

@@ -16,8 +16,8 @@ import javax.persistence.Embeddable;
 @Getter
 public class Address {
 
-    @Column(name = "zipcode")
-    private String zipCode;
+    @Column(name = "address_name")
+    private String addressName;
 
     @Column(name = "region_1depth_name")
     private String region_1depth_name;
