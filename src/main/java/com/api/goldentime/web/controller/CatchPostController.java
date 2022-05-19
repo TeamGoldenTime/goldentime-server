@@ -32,9 +32,12 @@ public class CatchPostController {
     @PostMapping("/pet/post/catch")
     public ResponseEntity<ResponseDto<CatchPostSaveResponseDto>> save(@RequestBody @Valid CatchPostSaveRequestDto catchPostSaveRequestDto)
     {
-        //Address address = KakaoApiController.getAddress(lat , lng);
-        //CatchPost post = catchPostService.save(catchPostSaveRequestDto, address);
-        CatchPost post = catchPostService.save(catchPostSaveRequestDto);
+        Double latitude = catchPostSaveRequestDto.getLatitude();
+        Double longitude = catchPostSaveRequestDto.getLongitude();
+
+        Address address = KakaoApiController.kakaoApi(latitude, longitude);
+
+        CatchPost post = catchPostService.save(catchPostSaveRequestDto, address);
 
         CatchPostSaveResponseDto catchPostSaveResponseDto = CatchPostSaveResponseDto.builder()
                 .id(post.getId())

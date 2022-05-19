@@ -1,5 +1,6 @@
 package com.api.goldentime.service.post;
 
+import com.api.goldentime.domain.post.Address;
 import com.api.goldentime.domain.post.LostPost;
 import com.api.goldentime.domain.post.PostType;
 import com.api.goldentime.domain.user.User;
@@ -20,7 +21,7 @@ public class LostPostService {
     private final UserRepository userRepository;
 
     @Transactional
-    public LostPost save(LostPostSaveRequestDto lostPostSaveRequestDto)
+    public LostPost save(LostPostSaveRequestDto lostPostSaveRequestDto, Address address)
     {
         Long userId = lostPostSaveRequestDto.getUserId();
         User user = userRepository.findById(userId).orElse(null);
@@ -30,6 +31,7 @@ public class LostPostService {
 
         LostPost lostPost = lostPostSaveRequestDto.toEntity();
         lostPost.setType(PostType.LOST);
+        lostPost.setAddress(address);
         lostPost.setWriter(user);
 
         return lostPostRepository.save(lostPost);

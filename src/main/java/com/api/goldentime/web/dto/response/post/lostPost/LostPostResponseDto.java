@@ -43,10 +43,9 @@ public class LostPostResponseDto {
             .images(lostPost.getLostImages())
             .latitude(lostPost.getRegion().getLatitude())
             .longitude(lostPost.getRegion().getLongitude())
-            //        TODO:: Address구현 후 살리기
-//            .region_1depth_name(lostPost.getAddress().getRegion_1depth_name())
-//            .region_2depth_name(lostPost.getAddress().getRegion_2depth_name())
-//            .region_2depth_name(lostPost.getAddress().getRegion_3depth_name())
+            .region_1depth_name(lostPost.getAddress().getRegion_1depth_name())
+            .region_2depth_name(lostPost.getAddress().getRegion_2depth_name())
+            .region_2depth_name(lostPost.getAddress().getRegion_3depth_name())
             .kind(lostPost.getKind())
             .gender(lostPost.getGender())
             .color(lostPost.getColor())

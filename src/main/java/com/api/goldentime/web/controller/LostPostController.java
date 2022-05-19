@@ -1,5 +1,7 @@
 package com.api.goldentime.web.controller;
 
+import com.api.goldentime.domain.post.Address;
+import com.api.goldentime.domain.post.CatchPost;
 import com.api.goldentime.domain.post.LostPost;
 import com.api.goldentime.service.post.LostPostService;
 import com.api.goldentime.web.dto.request.post.lostPost.LostPostSaveRequestDto;
@@ -31,7 +33,14 @@ public class LostPostController {
   @PostMapping("/pet/post/lost")
   public ResponseEntity<ResponseDto<LostPostSaveResponseDto>> save(
       @RequestBody @Valid LostPostSaveRequestDto lostPostSaveRequestDto) {
-    LostPost post = lostPostService.save(lostPostSaveRequestDto);
+
+    Double latitude = lostPostSaveRequestDto.getLatitude();
+    Double longitude = lostPostSaveRequestDto.getLongitude();
+
+    Address address = KakaoApiController.kakaoApi(latitude, longitude);
+
+
+    LostPost post = lostPostService.save(lostPostSaveRequestDto, address);
 
     LostPostSaveResponseDto lostPostSaveResponseDto = LostPostSaveResponseDto.builder()
         .id(post.getId())

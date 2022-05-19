@@ -40,10 +40,9 @@ public class CatchPostResponseDto {
         .images(catchPost.getCatchImages())
         .latitude(catchPost.getRegion().getLatitude())
         .longitude(catchPost.getRegion().getLongitude())
-        //        TODO:: Address구현 후 살리기
-//        .region_1depth_name(catchPost.getAddress().getRegion_1depth_name())
-//        .region_2depth_name(catchPost.getAddress().getRegion_2depth_name())
-//        .region_3depth_name(catchPost.getAddress().getRegion_3depth_name())
+        .region_1depth_name(catchPost.getAddress().getRegion_1depth_name())
+        .region_2depth_name(catchPost.getAddress().getRegion_2depth_name())
+        .region_3depth_name(catchPost.getAddress().getRegion_3depth_name())
         .kind(catchPost.getKind())
         .gender(catchPost.getGender())
         .color(catchPost.getColor())

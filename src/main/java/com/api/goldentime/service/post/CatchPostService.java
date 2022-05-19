@@ -21,7 +21,7 @@ public class CatchPostService {
     private final UserRepository userRepository;
 
     @Transactional
-    public CatchPost save(CatchPostSaveRequestDto catchPostSaveRequestDto)
+    public CatchPost save(CatchPostSaveRequestDto catchPostSaveRequestDto, Address address)
     {
         Long userId = catchPostSaveRequestDto.getUserId();
         User user = userRepository.findById(userId).orElse(null);
@@ -31,7 +31,7 @@ public class CatchPostService {
 
         CatchPost catchPost = catchPostSaveRequestDto.toEntity();
         catchPost.setType(PostType.CATCH);
-        //catchPost.setAddress(address);
+        catchPost.setAddress(address);
         catchPost.setWriter(user);
 
         return catchPostRepository.save(catchPost);
