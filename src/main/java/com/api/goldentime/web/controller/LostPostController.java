@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -128,8 +129,8 @@ public class LostPostController {
     }
 
     List<PetData> petDataList = similarityResponseDtoList.stream()
-        .map(s -> petDataRepository.findByImgUrl(s.getId()).orElseThrow(() -> {
-          throw new IllegalStateException("값 없음");}))
+        .map(s -> petDataRepository.findByImgUrl(s.getId()).orElse(null))
+        .filter(Objects::nonNull)
         .collect(Collectors.toList());
 
     List<PetDataResponseDto> petDataDtoList = petDataList.stream()
