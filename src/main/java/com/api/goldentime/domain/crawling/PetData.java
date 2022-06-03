@@ -23,8 +23,14 @@ public class PetData {
     @Column
     private String imgUrl;
 
-    @Column
-    private String postNum;
+    @Column(name = "region_1depth_name")
+    private String region_1depth_name;
+
+    @Column(name = "region_2depth_name")
+    private String region_2depth_name;
+
+    @Column(name = "region_3depth_name")
+    private String region_3depth_name;
 
     @Column
     private String reportDate;

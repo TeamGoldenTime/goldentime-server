@@ -31,6 +31,7 @@ dependencies {
 	implementation group: 'commons-io', name: 'commons-io', version: '2.4'
 	implementation group: 'org.json', name: 'json', version: '20090211'
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	implementation group: 'com.google.firebase', name: 'firebase-admin', version: '6.8.1'
 	runtimeOnly 'com.h2database:h2'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

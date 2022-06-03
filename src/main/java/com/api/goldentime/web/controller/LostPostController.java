@@ -7,6 +7,7 @@ import com.api.goldentime.repository.PetDataRepository;
 import com.api.goldentime.service.post.LostPostService;
 import com.api.goldentime.web.dto.request.post.lostPost.LostPostSaveRequestDto;
 import com.api.goldentime.web.dto.response.ResponseDto;
+import com.api.goldentime.web.dto.response.ResponseDto.ResponseStatus;
 import com.api.goldentime.web.dto.response.crawling.PetDataResponseDto;
 import com.api.goldentime.web.dto.response.post.SimilarityResponseDto;
 import com.api.goldentime.web.dto.response.post.lostPost.LostPostResponseDto;
@@ -133,13 +134,39 @@ public class LostPostController {
         .filter(Objects::nonNull)
         .collect(Collectors.toList());
 
-    List<PetDataResponseDto> petDataDtoList = petDataList.stream()
-        .map(PetDataResponseDto::of)
+    //related 필터링
+    List<PetData> related = petDataList.stream()
+        .filter(p -> p.getRegion_1depth_name().equals(lostPost.getAddress().getRegion_1depth_name()))
         .collect(Collectors.toList());
 
-    ResponseDto<List<PetDataResponseDto>> response = ResponseDto.<List<PetDataResponseDto>>builder()
+    //unrelated 필터링
+    List<PetData> unrelated = petDataList.stream()
+        .filter(p -> !p.getRegion_1depth_name().equals(lostPost.getAddress().getRegion_1depth_name()))
+        .collect(Collectors.toList());
+
+    PetDataResponseDto petDataResponseDto = PetDataResponseDto.of(related, unrelated);
+
+    ResponseDto<PetDataResponseDto> response = ResponseDto.<PetDataResponseDto>builder()
         .status(ResponseDto.ResponseStatus.SUCCESS)
-        .data(petDataDtoList)
+        .data(petDataResponseDto)
+        .build();
+
+    return new ResponseEntity<>(response, HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "자신의 분실신고 정보 가져오기")
+  @GetMapping("/pet/post/lost/{userId}/me")
+  public ResponseEntity<ResponseDto<List<LostPostResponseDto>>> getLostPostByUser(@PathVariable Long userId) {
+
+    List<LostPost> lostPosts = lostPostService.getLostPostByUser(userId);
+
+    List<LostPostResponseDto> lostPostResponseDtoList = lostPosts.stream()
+        .map(LostPostResponseDto::of)
+        .collect(Collectors.toList());
+
+    ResponseDto<List<LostPostResponseDto>> response = ResponseDto.<List<LostPostResponseDto>>builder()
+        .status(ResponseStatus.SUCCESS)
+        .data(lostPostResponseDtoList)
         .build();
 
     return new ResponseEntity<>(response, HttpStatus.OK);

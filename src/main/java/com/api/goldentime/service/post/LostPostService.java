@@ -7,6 +7,7 @@ import com.api.goldentime.domain.user.User;
 import com.api.goldentime.repository.LostPostRepository;
 import com.api.goldentime.repository.UserRepository;
 import com.api.goldentime.web.dto.request.post.lostPost.LostPostSaveRequestDto;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +55,13 @@ public class LostPostService {
         }
 
         return post;
+    }
+
+    public List<LostPost> getLostPostByUser(Long userId) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
+
+        return lostPostRepository.getLostPostsByWriterOrderByDateDesc(user);
     }
 
 
