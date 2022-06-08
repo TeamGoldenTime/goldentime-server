@@ -35,6 +35,8 @@ public class SimilarityResponseDto {
 
     private String type;
 
+    private String writer;
+
     private String imgUrl;
 
     private String region_1depth_name;
@@ -61,6 +63,7 @@ public class SimilarityResponseDto {
           .id(petData.getId())
           .type("shelter")
           .imgUrl(petData.getImgUrl())
+          .writer("동물보호 관리 시스템")
           .region_1depth_name(petData.getRegion_1depth_name())
           .region_2depth_name(petData.getRegion_2depth_name())
           .region_3depth_name(petData.getRegion_3depth_name())
@@ -78,6 +81,7 @@ public class SimilarityResponseDto {
           .id(catchPost.getId())
           .type("catch")
           .imgUrl(catchPost.getCatchImages().get(0).getLocation())
+          .writer(catchPost.getWriter().getName())
           .region_1depth_name(catchPost.getAddress().getRegion_1depth_name())
           .region_2depth_name(catchPost.getAddress().getRegion_2depth_name())
           .region_3depth_name(catchPost.getAddress().getRegion_3depth_name())
