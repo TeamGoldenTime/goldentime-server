@@ -2,18 +2,22 @@ package com.api.goldentime.web.controller;
 
 import com.api.goldentime.domain.crawling.PetData;
 import com.api.goldentime.domain.post.Address;
+import com.api.goldentime.domain.post.CatchPost;
 import com.api.goldentime.domain.post.LostPost;
+import com.api.goldentime.repository.CatchPostRepository;
 import com.api.goldentime.repository.PetDataRepository;
 import com.api.goldentime.service.post.LostPostService;
 import com.api.goldentime.web.dto.request.post.lostPost.LostPostSaveRequestDto;
 import com.api.goldentime.web.dto.response.ResponseDto;
 import com.api.goldentime.web.dto.response.ResponseDto.ResponseStatus;
-import com.api.goldentime.web.dto.response.crawling.PetDataResponseDto;
-import com.api.goldentime.web.dto.response.post.SimilarityResponseDto;
+import com.api.goldentime.web.dto.response.crawling.SimilarityResponseDto;
+import com.api.goldentime.web.dto.response.crawling.SimilarityResponseDto.SimilarityResponse;
+import com.api.goldentime.web.dto.response.post.SimilarImageResponseDto;
 import com.api.goldentime.web.dto.response.post.lostPost.LostPostResponseDto;
 import com.api.goldentime.web.dto.response.post.lostPost.LostPostSaveResponseDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +45,8 @@ public class LostPostController {
 
   private final LostPostService lostPostService;
   private final PetDataRepository petDataRepository;
+  private final CatchPostRepository catchPostRepository;
+
 
   @ApiOperation(value = "분실 신고 등록")
   @PostMapping("/pet/post/lost")
@@ -120,33 +126,51 @@ public class LostPostController {
     request.put("path", lostPost.getLostImages().get(0).getLocation());
     HttpEntity<?> httpEntity = new HttpEntity<>(request, httpHeaders);
 
-    List<SimilarityResponseDto> similarityResponseDtoList = restTemplate.exchange(apiURL,
+    List<SimilarImageResponseDto> similarImageResponseDto = restTemplate.exchange(apiURL,
         HttpMethod.POST, httpEntity,
-        new ParameterizedTypeReference<List<SimilarityResponseDto>>() {})
+        new ParameterizedTypeReference<List<SimilarImageResponseDto>>() {})
         .getBody();
 
-    if (similarityResponseDtoList == null) {
+    if (similarImageResponseDto == null) {
       throw new IllegalArgumentException("분석 결과를 받아올 수 없습니다.");
     }
 
-    List<PetData> petDataList = similarityResponseDtoList.stream()
+    List<PetData> petDataList = similarImageResponseDto.stream()
         .map(s -> petDataRepository.findByImgUrl(s.getId()).orElse(null))
         .filter(Objects::nonNull)
         .collect(Collectors.toList());
 
-    //related 필터링
-    List<PetData> related = petDataList.stream()
-        .filter(p -> p.getRegion_1depth_name().equals(lostPost.getAddress().getRegion_1depth_name()))
+    List<CatchPost> catchPostList = similarImageResponseDto.stream()
+        .map(s -> catchPostRepository.findByImgUrl(s.getId()).orElse(null))
+        .filter(Objects::nonNull)
         .collect(Collectors.toList());
 
-    //unrelated 필터링
-    List<PetData> unrelated = petDataList.stream()
-        .filter(p -> !p.getRegion_1depth_name().equals(lostPost.getAddress().getRegion_1depth_name()))
-        .collect(Collectors.toList());
+    List<SimilarityResponse> related = new ArrayList<>();
+    List<SimilarityResponse> unrelated = new ArrayList<>();
 
-    PetDataResponseDto petDataResponseDto = PetDataResponseDto.of(related, unrelated);
+    catchPostList.forEach(
+        c -> {
+          if (c.getAddress().getRegion_1depth_name().equals(lostPost.getAddress().getRegion_1depth_name())) {
+            related.add(SimilarityResponse.of(c));
+          } else {
+            unrelated.add(SimilarityResponse.of(c));
+          }
+        }
+    );
 
-    ResponseDto<PetDataResponseDto> response = ResponseDto.<PetDataResponseDto>builder()
+    petDataList.forEach(
+        p -> {
+          if (p.getRegion_1depth_name().equals(lostPost.getAddress().getRegion_1depth_name())) {
+            related.add(SimilarityResponse.of(p));
+        } else {
+            unrelated.add(SimilarityResponse.of(p));
+          }
+        }
+    );
+
+    SimilarityResponseDto petDataResponseDto = SimilarityResponseDto.of(related, unrelated);
+
+    ResponseDto<SimilarityResponseDto> response = ResponseDto.<SimilarityResponseDto>builder()
         .status(ResponseDto.ResponseStatus.SUCCESS)
         .data(petDataResponseDto)
         .build();
