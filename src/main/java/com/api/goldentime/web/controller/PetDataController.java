@@ -3,7 +3,7 @@ package com.api.goldentime.web.controller;
 import com.api.goldentime.domain.crawling.PetData;
 import com.api.goldentime.service.post.PetDataService;
 import com.api.goldentime.web.dto.response.ResponseDto;
-import com.api.goldentime.web.dto.response.crawling.PetDataResponseDto.PetDataResponse;
+import com.api.goldentime.web.dto.response.crawling.SimilarityResponseDto.SimilarityResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.io.IOException;
@@ -86,9 +86,9 @@ public class PetDataController {
     @GetMapping("/pet/data/{id}")
     public ResponseEntity<?> getPetDataById(@PathVariable Long id) {
         PetData petData = petDataService.findById(id);
-        PetDataResponse petDataResponse = PetDataResponse.of(petData);
+        SimilarityResponse petDataResponse = SimilarityResponse.of(petData);
 
-        ResponseDto<PetDataResponse> response = ResponseDto.<PetDataResponse>builder()
+        ResponseDto<SimilarityResponse> response = ResponseDto.<SimilarityResponse>builder()
             .status(ResponseDto.ResponseStatus.SUCCESS)
             .message("분실 신고 게시물 목록 조회 성공")
             .data(petDataResponse)
